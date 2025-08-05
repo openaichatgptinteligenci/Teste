@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login com Google – Charada Notas</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    }
+
+    .login-container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    #google-button {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.85em;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <h1>Login com Google – Charada Notas</h1>
+
+    <!-- O botão de login será renderizado automaticamente aqui -->
+    <div id="google-button"></div>
+
+    <div class="footer">
+      Seu login é seguro. Usamos OAuth 2.0 do Google.
+    </div>
+  </div>
+
+  <!-- SDK oficial da Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <script>
+    // 🔐 Seu CLIENT ID do Google OAuth 2.0
+    const CLIENT_ID = "55407588913-498vd6npvguj4m65rm37pcgg5bdbpvp2.apps.googleusercontent.com";
+
+    // Inicializa a biblioteca de login do Google ao carregar a página
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: CLIENT_ID,
+        callback: handleCredentialResponse, // Função chamada após login bem-sucedido
+        ux_mode: "popup" // ou "redirect", se quiser redirecionar ao login
+      });
+
+      // Renderiza o botão de login
+      google.accounts.id.renderButton(
+        document.getElementById("google-button"),
+        {
+          theme: "outline",     // Estilo do botão: "outline", "filled_blue", "filled_black"
+          size: "large",        // Tamanho: "small", "medium", "large"
+          type: "standard",     // Tipo: "standard" ou "icon"
+          shape: "pill",        // Formato: "rectangular", "pill", etc.
+          logo_alignment: "left"
+        }
+      );
+    };
+
+    // 🎯 Callback chamada quando o usuário faz login com sucesso
+    function handleCredentialResponse(response) {
+      const jwt = response.credential;
+
+      // Decodifica o JWT (somente no client, sem backend ainda)
+      const payload = JSON.parse(atob(jwt.split('.')[1]));
+
+      console.log("Usuário logado:", payload);
+
+      // Exemplo: mostra nome do usuário
+      alert(`Bem-vindo, ${payload.name}!`);
+
+      // 💡 Aqui você pode enviar o JWT ao backend para validação (futuramente)
+      // fetch('/api/auth', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ token: jwt })
+      // });
+    }
+  </script>
+</body>
+</html>

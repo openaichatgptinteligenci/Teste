@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Charada Notas – Produto Premium</title>
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00ffc8;
+    }
+
+    p {
+      max-width: 800px;
+      text-align: center;
+      line-height: 1.6;
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .features {
+      margin-top: 30px;
+    }
+
+    .features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .features li {
+      margin: 10px 0;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .cta {
+      margin: 50px 0;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .cta a {
+      display: inline-block;
+      background: #25D366;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: background 0.3s ease;
+    }
+
+    .cta a:hover {
+      background: #1ebe5b;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    #login-container {
+      margin-top: 100px;
+    }
+
+    #content {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .cta h2 {
+        font-size: 1.5rem;
+      }
+
+      p, .features li {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login com Google -->
+  <div id="login-container">
+    <div id="g_id_onload"
+         data-client_id="449145321612-b71qr8v6otstfqemcmd9in31asvg4a0p.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="rectangular"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-size="large"
+         data-logo_alignment="left">
+    </div>
+  </div>
+
+  <!-- Conteúdo Principal (oculto até login) -->
+  <div id="content">
+    <h1>Charada Notas – Organização Inteligente</h1>
+
+    <p>
+      Chegou o produto perfeito para quem busca eficiência, modernidade e alta performance.
+      O <strong>Charada Notas</strong> foi criado pensando em estudantes, profissionais e criadores que valorizam organização e qualidade.
+    </p>
+
+    <div class="features">
+      <ul>
+        <li>✅ Alta Qualidade de Design</li>
+        <li>✅ Ideal para estudantes e profissionais</li>
+        <li>✅ Interface digital moderna e responsiva</li>
+        <li>✅ Sincronização em nuvem (futuramente)</li>
+        <li>✅ Estilo minimalista e elegante</li>
+        <li>✅ Acesso multiplataforma</li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <h2>Gostou do nosso produto? Agora compre!</h2>
+      <a href="https://wa.me/5544998329604" target="_blank">
+        Comprar via WhatsApp
+      </a>
+    </div>
+
+    <footer>
+      © 2025 Charada Notas – Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <!-- Script para lidar com login -->
+  <script>
+    function handleCredentialResponse(response) {
+      // Aqui você pode verificar o ID Token se quiser segurança extra
+      // console.log("Encoded JWT ID token: " + response.credential);
+
+      // Exibe o conteúdo após login
+      document.getElementById("login-container").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }
+  </script>
+</body>
+</html>
